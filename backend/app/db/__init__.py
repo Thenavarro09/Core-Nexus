@@ -1,0 +1,1 @@
+"""Acceso a SQL Server."""

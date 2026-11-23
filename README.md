@@ -1,52 +1,86 @@
-Core-Nexus 🗄️⚙️
+# Core-Nexus
 
-Proyecto Integrador: Suite de Administración y Monitoreo de Bases de Datos
+Proyecto integrador: suite de administración y monitoreo de bases de datos.
 
-Bienvenido al repositorio oficial de Core-Nexus. Este proyecto consiste en el diseño, desarrollo y documentación de una suite de software propia y funcional enfocada en la administración y monitoreo de bases de datos, tomando como modelo funcional y de inspiración la plataforma comercial AI-DBA.
+Core-Nexus es una suite propia para gestionar y monitorear instancias de SQL Server. Toma como referencia funcional la plataforma comercial AI-DBA y se construye como una solución original. El esquema de una Agencia de Viajes es solo un conjunto de datos de prueba: la aplicación se conecta a cualquier base de la instancia.
 
-🎯 Propósito Principal
+## Propósito
 
-Desarrollar una solución integral que permita gestionar, monitorear y optimizar entornos de bases de datos, aplicando los conocimientos adquiridos durante el curso de Administración de Bases de Datos y resolviendo problemas reales del entorno corporativo.
+Desarrollar una solución que permita gestionar, monitorear y optimizar entornos de bases de datos, aplicando los conocimientos del curso de Administración de Bases de Datos.
 
-📌 Objetivos Específicos
+## Objetivos
 
-Aplicación Práctica: Reforzar y llevar a la práctica los conceptos teóricos abordados a lo largo de las seis unidades de la asignatura de Administración de Bases de Datos.
+- Llevar a la práctica los conceptos de las unidades de Administración de Bases de Datos.
+- Conectar, administrar y automatizar un SGBD real (SQL Server 2025) desde código. El esquema de la Agencia de Viajes puede usarse como entorno de pruebas.
+- Aplicar control de versiones, diseño modular, manejo de errores y documentación técnica.
+- Analizar herramientas comerciales y proponer una solución equivalente y propia.
 
-Conexión Real: Desarrollar habilidades de conexión, administración y automatización mediante código sobre un Sistema Gestor de Bases de Datos (SGBD) real (como SQL Server 2025), utilizando como entorno de pruebas el esquema de una Agencia de Viajes.
+## Tecnologías
 
-Ingeniería de Software: Aplicar buenas prácticas de desarrollo en todo el ciclo de vida del proyecto, tales como:
+- SGBD: Microsoft SQL Server 2025
+- Control de versiones: Git y GitHub
+- Backend: Python 3.11+ con FastAPI y pyodbc
+- Interfaz: React, TypeScript y Vite
 
-Control de versiones con Git.
+## Requisitos
 
-Diseño basado en la modularidad.
+- Python 3.11 o superior
+- Node.js 20 o superior
+- SQL Server
+- [ODBC Driver 18 for SQL Server](https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server)
 
-Correcto manejo de errores y excepciones.
+## Instalación y uso
 
-Creación de documentación técnica clara y mantenible.
+Clona el repositorio:
 
-Análisis Crítico (Benchmarking): Analizar herramientas comerciales existentes en el mercado para comprender a fondo los problemas que resuelven y, con base en ello, proponer una solución equivalente, completamente original y propia.
+```bash
+git clone https://github.com/Thenavarro09/Core-Nexus.git
+cd Core-Nexus
+```
 
-🛠️ Tecnologías Utilizadas
+Copia la configuración de ejemplo y ajústala a tu instancia.
 
-(Nota: Actualiza esta sección con los lenguajes y frameworks específicos que vayas a utilizar en el desarrollo de la suite)
+En Windows (PowerShell o cmd):
 
-SGBD: Microsoft SQL Server 2025
+```powershell
+copy config.example.env config.env
+```
 
-Control de Versiones: Git & GitHub
+En macOS o Linux:
 
-Lenguaje Backend: [Ej. Python / C# / Java]
+```bash
+cp config.example.env config.env
+```
 
-Interfaz de Usuario: [Ej. React / WPF / Tkinter]
+Los scripts opcionales de prueba, como el de la Agencia de Viajes, van en [`database/`](database/). No son necesarios para arrancar la suite.
 
-🚀 Instalación y Uso
+Backend, desde `backend/`:
 
-Clona este repositorio: git clone https://github.com/Thenavarro09/Core-Nexus.git
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-Configura la cadena de conexión hacia tu instancia de SQL Server 2025 en el archivo config.env (ver config.example.env).
+En macOS o Linux activa el entorno con `source .venv/bin/activate`.
 
-Ejecuta el script de inicialización del entorno de la Agencia de Viajes (ubicado en la carpeta /database).
+La API queda en `http://127.0.0.1:8000`. La documentación interactiva está en `http://127.0.0.1:8000/docs`.
 
-Inicia la aplicación: [comando de inicio, ej. python main.py]
+Frontend, desde `frontend/`, en otra terminal:
 
-Desarrollado como Proyecto Integrador para la asignatura de Administración de Bases de Datos.# Core-Nexus
-Proyectito Base de datos
+```bash
+npm install
+npm run dev
+```
+
+Abre la dirección que muestra Vite, normalmente `http://127.0.0.1:5173`. El servidor de desarrollo reenvía `/api` al backend.
+
+## Estructura
+
+- `backend/` — API modular: salud, prueba de conexión, listado de bases y routers reservados para monitoreo y administración.
+- `frontend/` — interfaz con las secciones Conexiones, Monitoreo y Administración.
+- `database/` — scripts SQL de prueba, independientes del núcleo de la aplicación.
+- `config.example.env` — plantilla de conexión para `GET /api/databases`.
+
+Desarrollado como proyecto integrador para la asignatura de Administración de Bases de Datos.
